@@ -42,4 +42,11 @@ public class GlobalExceptionHandler {
                 ApiErrorResponseBuilder.notFound("Shape not found", ex.getMessage())
         );
     }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ApiErrorResponse> handleInternalServerError(Exception ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                ApiErrorResponseBuilder.notFound("Internal Server Error", ex.getMessage())
+        );
+    }
 }
