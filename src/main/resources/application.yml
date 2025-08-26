@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: shapesapi
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: ${DB_DRIVER}
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      dialect: ${HIBERNATE_DIALECT}
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: ${SPRING_JPA_FORMAT_SQL:true}
+
+  liquibase:
+    enabled: ${LIQUIBASE_ENABLED:true}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    root: ${LOG_LEVEL_ROOT:INFO}

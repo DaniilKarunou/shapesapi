@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+
+DB_USER=shapesapi_user
+DB_PASSWORD=shapesapi_password
+DB_NAME=shapesapi_db
+
+psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
+  CREATE USER $DB_USER WITH PASSWORD '$DB_PASSWORD';
+  CREATE ROLE audit;
+  GRANT audit TO $DB_USER;
+  CREATE DATABASE $DB_NAME;
+  GRANT CREATE ON DATABASE $DB_NAME TO $DB_USER;
+  GRANT CREATE ON DATABASE $DB_NAME TO audit;
+EOSQL
