@@ -1,16 +1,15 @@
 package com.shapesapi.handler;
 
+import com.shapesapi.IntegrationTest;
 import com.shapesapi.dto.ShapeRequest;
 import com.shapesapi.entity.ShapeEntity;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@SpringBootTest
+@IntegrationTest
 class SquareHandlerTest {
 
     @Autowired
