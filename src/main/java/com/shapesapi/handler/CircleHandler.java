@@ -8,11 +8,6 @@ import org.springframework.stereotype.Component;
 public class CircleHandler implements ShapeHandler {
 
     @Override
-    public String getShapeType() {
-        return "CIRCLE";
-    }
-
-    @Override
     public ShapeEntity handle(ShapeRequest request) {
         if (request.parameters().size() != 1) {
             throw new IllegalArgumentException("Circle requires 1 parameter (radius).");
@@ -21,5 +16,10 @@ public class CircleHandler implements ShapeHandler {
                 .type(getShapeType())
                 .parameters(request.parameters())
                 .build();
+    }
+
+    @Override
+    public String getShapeType() {
+        return "CIRCLE";
     }
 }

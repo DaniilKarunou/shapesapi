@@ -7,6 +7,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -36,17 +37,17 @@ public class GlobalExceptionHandler {
         );
     }
 
-    @ExceptionHandler(ShapeNotFoundException.class)
-    public ResponseEntity<ApiErrorResponse> handleNotFound(ShapeNotFoundException ex) {
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<ApiErrorResponse> handleNotFound(NoSuchElementException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                ApiErrorResponseBuilder.notFound("Shape not found", ex.getMessage())
+                ApiErrorResponseBuilder.notFound("Not found", ex.getMessage())
         );
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiErrorResponse> handleInternalServerError(Exception ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-                ApiErrorResponseBuilder.notFound("Internal Server Error", ex.getMessage())
+                ApiErrorResponseBuilder.internalServerError("Internal Server Error", ex.getMessage())
         );
     }
 }

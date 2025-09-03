@@ -3,12 +3,13 @@ package com.shapesapi.service;
 import com.shapesapi.dto.ShapeRequest;
 import com.shapesapi.dto.ShapeResponse;
 import com.shapesapi.entity.ShapeEntity;
-import com.shapesapi.exception.ShapeNotFoundException;
 import com.shapesapi.handler.ShapeHandler;
 import com.shapesapi.repository.ShapeRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,10 +25,8 @@ public class ShapeService {
     }
 
     public ShapeResponse addShape(ShapeRequest request) {
-        ShapeHandler handler = handlers.get(request.type().toUpperCase());
-        if (handler == null) {
-            throw new ShapeNotFoundException("Unknown shape type: " + request.type());
-        }
+        ShapeHandler handler = Optional.ofNullable(handlers.get(request.type().toUpperCase()))
+                .orElseThrow(() -> new NoSuchElementException("Unknown shape type: " + request.type()));
         ShapeEntity entity = handler.handle(request);
         ShapeEntity saved = repository.save(entity);
         return new ShapeResponse(saved.getId(), saved.getType(), saved.getParameters());

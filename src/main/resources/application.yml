@@ -9,6 +9,7 @@ spring:
 
   jpa:
     hibernate:
+      default_schema: ${HIBERNATE_DEFAULT_SCHEMA}
       ddl-auto: validate
       dialect: ${HIBERNATE_DIALECT}
     show-sql: false
@@ -18,6 +19,7 @@ spring:
 
   liquibase:
     enabled: ${LIQUIBASE_ENABLED:true}
+    default-schema: ${HIBERNATE_DEFAULT_SCHEMA}
 
 management:
   endpoints:

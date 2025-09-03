@@ -8,11 +8,6 @@ import org.springframework.stereotype.Component;
 public class RectangleHandler implements ShapeHandler {
 
     @Override
-    public String getShapeType() {
-        return "RECTANGLE";
-    }
-
-    @Override
     public ShapeEntity handle(ShapeRequest request) {
         if (request.parameters().size() != 2) {
             throw new IllegalArgumentException("Rectangle requires 2 parameters (width, height).");
@@ -21,5 +16,10 @@ public class RectangleHandler implements ShapeHandler {
                 .type(getShapeType())
                 .parameters(request.parameters())
                 .build();
+    }
+
+    @Override
+    public String getShapeType() {
+        return "RECTANGLE";
     }
 }
