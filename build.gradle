@@ -46,6 +46,7 @@ tasks.named('test') {
 sonar {
 	properties {
 		property "sonar.projectKey", "shapesapi"
+		property "sonar.organization", "DaniilKarunou"
 		property "sonar.host.url", "https://sonarcloud.io"
 	}
 }
